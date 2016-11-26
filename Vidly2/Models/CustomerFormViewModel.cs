@@ -6,15 +6,16 @@ using System.Web;
 
 namespace Vidly2.Models
 {
-    public class Customer
+    public class CustomerFormViewModel
     {
+        #region fromModel
         [Required]
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Name { get; set; }
-        
+
         [Display(Name = "Is subscribed to news letter?")]
         public bool IsSubscribedToNewsletter { get; set; }
 
@@ -23,11 +24,15 @@ namespace Vidly2.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime? BirthDate { get; set; }
 
-        // navigation property        
+        // navigation property
         public MembershipType MembershipType { get; set; }
 
         // foriegn key
         [Display(Name = "Membership Type")]
         public byte MembershipTypeId { get; set; }
+        #endregion fromModel
+
+        // for the drop down lists
+        public IEnumerable<MembershipType> MembershipTypes { get; set; }
     }
 }

@@ -33,5 +33,21 @@ namespace Vidly2.Controllers
             var customer = (from c in _dbContext.Customers where c.Id == Id select c).Include(c => c.MembershipType).SingleOrDefault();
             return View(customer);
         }
+
+        [HttpGet]
+        public ActionResult NewCustomer()
+        {
+            var customerViewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = _dbContext.MembershipTypes
+            };
+            return View(customerViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult SaveCustomer(CustomerFormViewModel customerViewModel)
+        {
+            return View();
+        }
     }
 }

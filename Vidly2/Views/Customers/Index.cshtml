@@ -6,6 +6,11 @@
 <h2>Customer</h2>
 
 <div>
+    <div class="row">
+        <div class="col-md-3">@Html.ActionLink("Create New Customer", "NewCustomer")</div>
+    </div>
+    <br />
+
     @if (Model != null && Model.Count != 0)
     {
         <div>
