@@ -1,0 +1,32 @@
+﻿@model IList<Vidly2.Models.Customer> 
+@{
+    ViewBag.Title = "Customer";
+}
+
+<h2>Customer</h2>
+
+<div>
+    @if (Model != null && Model.Count != 0)
+    {
+        <div>
+            <div class="row">
+                <div class="col-md-2 "><strong>Customers</strong></div>
+                <div class="col-md-2"><strong>Membership Type</strong></div>
+                <div class="col-md-2 "><strong>Disocunt Rate</strong></div>
+            </div>
+            
+            @foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-2">@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</div>
+                    <div class="col-md-2">@item.MembershipType.MembershipName</div>
+                    <div class="col-md-2">@item.MembershipType.DiscountRate %</div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>There are no customers to display</p>
+    }
+</div>

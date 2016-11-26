@@ -1,0 +1,30 @@
+﻿@model Vidly2.Models.Customer
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-md-2">Id</div>
+            <div class="col-md-2">@Model.Id</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">Name</div>
+            <div class="col-md-2">@Model.Name</div>
+        </div>
+        if (Model.BirthDate.HasValue)
+        {
+            <div class="row">
+                <div class="col-md-2">Birthdate</div>
+                <div class="col-md-2">@Model.BirthDate</div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>Customer not found with the selected ID</p>
+    }
+</div>

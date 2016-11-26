@@ -1,0 +1,27 @@
+﻿@model Vidly2.Models.Movie
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Movie Details</h2>
+<div>
+    <div class="row">
+        <div class="col-md-2"><strong>@Model.Name</strong></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Genre : </div>
+        <div class="col-md-2">@Model.Genre.Name</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Release Date : </div>
+        <div class="col-md-2">@Model.ReleaseDate</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Added Date</div>
+        <div class="col-md-2">@Model.DateAdded</div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Number In Stock : </div>
+        <div class="col-md-2">@Model.NumberInStock</div>
+    </div>
+</div>
