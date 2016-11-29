@@ -6,8 +6,9 @@ using System.Web;
 
 namespace Vidly2.Models
 {
-    public class Movie
+    public class MovieViewModel
     {
+        #region FromModel
         [Required]
         public int ID { get; set; }
 
@@ -17,13 +18,14 @@ namespace Vidly2.Models
 
         [Required]
         [DataType(DataType.Date)]
+        [Display(Name = "Release Date")]
         [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:d MMM yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DateAdded { get; set; }
+        public DateTime? DateAdded { get; set; }
 
         [Required]
         [Display(Name = "Number In Stock")]
@@ -36,5 +38,8 @@ namespace Vidly2.Models
 
         // Navigation property
         public Genre Genre { get; set; }
+        #endregion FromModel
+
+        public IEnumerable<Genre> Genres { get; set; }
     }
 }

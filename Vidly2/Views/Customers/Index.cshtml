@@ -7,7 +7,7 @@
 
 <div>
     <div class="row">
-        <div class="col-md-3">@Html.ActionLink("Create New Customer", "NewCustomer")</div>
+        <div class="col-md-3">@Html.ActionLink("Create New Customer", "NewOrEditCustomer", null, new { @class = "btn btn-primary"})</div>
     </div>
     <br />
 
@@ -18,14 +18,18 @@
                 <div class="col-md-2 "><strong>Customers</strong></div>
                 <div class="col-md-2"><strong>Membership Type</strong></div>
                 <div class="col-md-2 "><strong>Disocunt Rate</strong></div>
+                <div class="col-md-2 "><strong>Edit</strong></div>
+                <div class="col-md-2 "><strong>Details</strong></div>
             </div>
             
             @foreach (var item in Model)
             {
                 <div class="row">
-                    <div class="col-md-2">@Html.ActionLink(item.Name, "Details", new { Id = item.Id })</div>
+                    <div class="col-md-2">@item.Name</div>
                     <div class="col-md-2">@item.MembershipType.MembershipName</div>
                     <div class="col-md-2">@item.MembershipType.DiscountRate %</div>
+                    <div class="col-md-2">@Html.ActionLink("Edit", "NewOrEditCustomer", new { Id = item.Id })</div>
+                    <div class="col-md-2">@Html.ActionLink("Details", "Details", new { Id = item.Id })</div>
                 </div>
             }
         </div>

@@ -1,0 +1,49 @@
+﻿@model Vidly2.Models.MovieViewModel
+@{
+    if (Model.ID == 0)
+    {
+        ViewBag.Title = "Add New Movie";
+        <h2>Add New Movie</h2>
+    }
+    else
+    {
+        ViewBag.Title = "Edit Movie";
+        <h2>Edit Movie</h2>
+    }
+}
+
+
+@using (Html.BeginForm("SaveMovie", "Movies", "POST"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReleaseDate)
+        @Html.TextBoxFor(m => m.ReleaseDate, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ReleaseDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.NumberInStock)
+        @Html.TextBoxFor(m => m.NumberInStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NumberInStock)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.GenreId)
+        @Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), " Select ", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.GenreId)
+    </div>
+    @Html.HiddenFor(m => m.ID)
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="reset" class="btn btn-default">Reset</button>
+    </div>
+}
+
+@*for client side validation jquery-val bundle*@
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval");    
+}

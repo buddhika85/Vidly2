@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -243,11 +247,18 @@
     <Compile Include="Migrations\201611261738089_AddGenreToMovie.Designer.cs">
       <DependentUpon>201611261738089_AddGenreToMovie.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611271946565_AddedMovieStockValidation.cs" />
+    <Compile Include="Migrations\201611271946565_AddedMovieStockValidation.Designer.cs">
+      <DependentUpon>201611271946565_AddedMovieStockValidation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerFormViewModel.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Min18YearsIfAMember.cs" />
+    <Compile Include="Models\MovieViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
@@ -322,7 +333,8 @@
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
-    <Content Include="Views\Customers\NewCustomer.cshtml" />
+    <Content Include="Views\Customers\NewOrEditCustomer.cshtml" />
+    <Content Include="Views\Movies\AddOrEditMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -365,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611261738089_AddGenreToMovie.resx">
       <DependentUpon>201611261738089_AddGenreToMovie.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611271946565_AddedMovieStockValidation.resx">
+      <DependentUpon>201611271946565_AddedMovieStockValidation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

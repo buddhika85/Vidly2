@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Vidly2.Models;
 using System.Data.Entity;
+using AutoMapper;
 
 namespace Vidly2.Controllers
 {
@@ -13,6 +14,7 @@ namespace Vidly2.Controllers
         ApplicationDbContext _dbContext;
         public CustomersController()
         {
+            //Mapper.CreateMap<CustomerFormViewModel, Customer>().ReverseMap();
             _dbContext = new ApplicationDbContext();
         }
 
@@ -35,19 +37,46 @@ namespace Vidly2.Controllers
         }
 
         [HttpGet]
-        public ActionResult NewCustomer()
+        public ActionResult NewOrEditCustomer(int? Id)
         {
-            var customerViewModel = new CustomerFormViewModel
+            var customerViewModel = new CustomerFormViewModel();
+            if (Id.HasValue)
             {
-                MembershipTypes = _dbContext.MembershipTypes
-            };
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<Customer, CustomerFormViewModel>());
+                var mapper = config.CreateMapper();
+                customerViewModel = mapper.Map<CustomerFormViewModel>(_dbContext.Customers.Find(Id));
+            }
+            customerViewModel.MembershipTypes = _dbContext.MembershipTypes;
             return View(customerViewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SaveCustomer(CustomerFormViewModel customerViewModel)
         {
-            return View();
+            // on validation error
+            if (! ModelState.IsValid)
+            {
+                customerViewModel.MembershipTypes = _dbContext.MembershipTypes;
+                return View(nameof(NewOrEditCustomer), customerViewModel);
+            }            
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<CustomerFormViewModel, Customer>());
+            var mapper = config.CreateMapper();
+            var customer = mapper.Map<Customer>(customerViewModel);
+            if (customer.Id == 0)
+            {
+                _dbContext.Customers.Add(customer);
+            }
+            else
+            {
+                var customerFromDb = _dbContext.Customers.Find(customer.Id);
+                customerFromDb.Name = customer.Name;
+                customerFromDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+                customerFromDb.MembershipTypeId = customer.MembershipTypeId;
+                customerFromDb.BirthDate = customer.BirthDate;
+            }
+            _dbContext.SaveChanges();
+            return RedirectToAction(nameof(Index), "Customers");
         }
     }
 }

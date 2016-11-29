@@ -21,7 +21,8 @@ namespace Vidly2.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:d MMM yyyy}")]
+        [Min18YearsIfAMember]
         public DateTime? BirthDate { get; set; }
 
         // navigation property
